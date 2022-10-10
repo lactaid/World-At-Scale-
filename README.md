@@ -6,6 +6,7 @@
 **Descargas necesarias:**
 - pip install opencv-python
 - pip install opencv-contrib-python
+###Estas se supone que ya vienen instaladas, si no, usar pip install con el nombre correspondiente
 - Numpy
 - PIL
 - tkinter
