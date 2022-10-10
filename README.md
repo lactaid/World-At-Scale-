@@ -6,6 +6,9 @@
 **Descargas necesarias:**
 - pip install opencv-python
 - pip install opencv-contrib-python
+- Numpy
+- PIL
+- tkinter
 
  **(Descargar dentro de cmd o anaconda)**
 
