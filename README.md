@@ -13,7 +13,7 @@
 - PIL
 - tkinter
 
- **(Descargar dentro de cmd o anaconda)**
+ **NOTA: Descargar dentro de cmd o anaconda, de preferencia anaconda para que se ponga en el PATH automaticamente**
 
 ### Links utiles:
 - Create a Image Viewer App using Python | Python: https://www.youtube.com/watch?v=l4ifwGaWyKo&ab_channel=ParvatComputerTechnology
