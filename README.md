@@ -13,9 +13,9 @@
 - PIL
 - tkinter
 
- **NOTA: Descargar dentro de cmd o anaconda, de preferencia anaconda para que se ponga en el PATH automaticamente**
+ **NOTA: Descargar dentro de cmd o anaconda, de preferencia anaconda para que se ponga en el PATH automáticamente**
 
-### Links utiles:
+### Links útiles:
 - Create a Image Viewer App using Python | Python: https://www.youtube.com/watch?v=l4ifwGaWyKo&ab_channel=ParvatComputerTechnology
 - Measure the size of an object | with Opencv, Aruco marker and Python: https://www.youtube.com/watch?v=lbgl2u6KrDU&t=221s&ab_channel=Pysource
 - How to Use Background Subtraction Methods: https://docs.opencv.org/4.x/d1/dc5/tutorial_background_subtraction.html  
