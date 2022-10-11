@@ -35,6 +35,7 @@ def showimage():
     label_image['image'] = img
     img.close()
 
+
 def medir():
 
     a = img_path
@@ -51,18 +52,22 @@ def medir():
         # Get rect
         rect = cv2.minAreaRect(cnt)
         (x, y), (w, h), angle = rect
+
         # Display rectangle
         box = cv2.boxPoints(rect)
         box = np.int0(box)
+
         cv2.circle(img, (int(x), int(y)), 5, (0, 0, 255), -1)
-        cv2.polylines(img, [cnt], True, (255, 0, 0), 2)
-        print("box: ", box)
+        cv2.polylines(img, [box], True, (255, 0, 0), 2)  # caja
+        # cv2.puText(img, "Width {}".format(w), int)
+        print("box: \n", box)
     print("x: ", x)
     print("y: ", y)
     print("w: ", w)
     print("h: ", h)
     cv2.imshow("Image", img)
     cv2.waitKey(0)
+
 
 btn = Button(text="Select Image", command=showimage)
 
