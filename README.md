@@ -1,7 +1,7 @@
 
 # World-At-Scale
 
-## El programa se llama app.py
+## El programa es nebreaska 2 en https://github.com/lactaid/World-At-Scale-/blob/b89f42cb97ffa76a064ea5aca833acf8296a8cd6/medidor%20objetos/nebraska2.py
 
 **Descargas necesarias:**
 - pip install opencv-python
