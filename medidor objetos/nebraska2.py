@@ -5,47 +5,50 @@ from PIL import Image
 
 import cv2
 
-xc = []
-yc = []
-coord = {}
-print("hola")
+xc = []  # lista de coordenadas x
+yc = []  # lista de coordenadas en y
+# coord = {}
+print("Coordenadas originales: ")
 
-# para cuando hacemos clic
+# funcion para cuando hacemos clic
 
 
 def mousePoints(event, x, y, flags, params):
 
     font = cv2.FONT_HERSHEY_SIMPLEX
-    if event == cv2.EVENT_LBUTTONDOWN:
-        print(x, y)
-        xc.append(x)
+    if event == cv2.EVENT_LBUTTONDOWN:  # funcion de cv2 para detectar input de mouse
+        print(x, y)  # imprimimos las coordenadas obtenidas
+        xc.append(x)  # agregamos la coordenada a la lista de xc y yc
         yc.append(y)
-        if len(xc) == 1:
-            cv2.putText(img, 'A', (x, y), font, 1, (255, 249, 0), 3)
+        if len(xc) == 1:  # se despliega el nombre de la coordenada dependiendo de que tantos elementos esten en la lista xc, una vez que supera 4, ya no se toma en cuenta
+            cv2.putText(img, 'A', (x, y), font, 1, (255, 249, 0), 2)
 
         elif len(xc) == 2:
-            cv2.putText(img, 'B', (x, y), font, 1, (255, 249, 0), 3)
+            cv2.putText(img, 'B', (x, y), font, 1, (255, 249, 0), 2)
 
         elif len(xc) == 3:
-            cv2.putText(img, 'C', (x, y), font, 1, (255, 249, 0), 3)
+            cv2.putText(img, 'C', (x, y), font, 1, (255, 249, 0), 2)
 
         elif len(xc) == 4:
-            cv2.putText(img, 'D', (x, y), font, 1, (255, 249, 0), 3)
+            cv2.putText(img, 'D', (x, y), font, 1, (255, 249, 0), 2)
 
         else:
             cv2.putText(img, '.', (x, y), font, 1, (255, 249, 0), 3)
+        # creamos una nueva imagen con la tag de img
         cv2.imwrite('new.jpg', img)
+        # mostramos el resultado al finalizar cada instancia
         cv2.imshow('image', img)
 
 
-img = cv2.imread('images\\2x2.jpg')
-cv2.imshow('image', img)
+# img ahora vale la imagen original
+img = cv2.imread('medidor objetos\images\minecraft 3.png')
+# cv2.imshow('image', img)
 cv2.setMouseCallback("image", mousePoints)
 
 cv2.waitKey(0)
 
 # encontrar el centro
-image = Image.open('images\\2x2.jpg')
+image = Image.open('medidor objetos\images\minecraft 3.png')
 centroX = image.size[0]/2
 centroY = image.size[1]/2
 print('size: ', image.size)
@@ -131,4 +134,7 @@ print("vz: ", vz)
 u = cmath.sqrt(ux**2+uy**2+uz**2)
 v = cmath.sqrt(vx**2+vy**2+vz**2)
 
-print("Ratio", (v/u).real)  # para que imprima eln umero real
+if np.isnan((v/u)):
+    print("Hubo un error, intenta otra vez por favor")
+else:
+    print("Ratio: ", (v/u).real)  # para que imprima el numero real
