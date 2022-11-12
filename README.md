@@ -42,19 +42,19 @@
 <ul>
   <li>Numpy
   <ul>
-      <li>pip install Numpy-python</li>
+      <li>pip install numpy</li>
     </ul>
   </li>
   
   <li>PIL
   <ul>
-      <li>pip install Pillow-python</li>
+      <li>pip install Pillow</li>
     </ul>
   </li>
   
   <li>tkinter
     <ul>
-      <li>pip install tkinter-python</li>
+      <li>pip install tkinter</li>
     </ul>
   </li>
 </ul>
@@ -62,12 +62,13 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)
 <!-- Links -->
-<h2 id="Descargas"> 👉 Links útiles: </h2>
+<h2 id="Links"> 👉 Links útiles: </h2>
 
 - Create a Image Viewer App using Python | Python: https://www.youtube.com/watch?v=l4ifwGaWyKo&ab_channel=ParvatComputerTechnology
+- Using OpenCV to mark points and store the coordinates on an image in Python: https://www.youtube.com/watch?v=0iSM5Br-UVs&ab_channel=RohanRouth
 - Measure the size of an object | with Opencv, Aruco marker and Python: https://www.youtube.com/watch?v=lbgl2u6KrDU&t=221s&ab_channel=Pysource
 - How to Use Background Subtraction Methods: https://docs.opencv.org/4.x/d1/dc5/tutorial_background_subtraction.html  
-
+- Python Package Index : https://pypi.org/
 - Decoracion para markdown: https://github.com/andreasbm/readme
 
 ![](https://www.gran-turismo.com/gtsport/decal/6917621470574151192_1.png)
