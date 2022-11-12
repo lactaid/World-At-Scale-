@@ -32,8 +32,18 @@
     <ul>
       <li>pip install opencv-python</li>
       <li>pip install opencv-contrib-python</li>
+      <li>Ayuda adicional: <br>
+      https://www.geeksforgeeks.org/how-to-install-opencv-for-python-in-windows <br> 
+      http://web.cecs.pdx.edu/~fliu/courses/cs410/python-opencv.html/</li>
     </ul>
    </li>
+   
+  <li>Matplotlib
+  <ul>
+      <li>pip install matplotlib</li>
+    </ul>
+  </li>
+   
 </ul>
 
 <br>
