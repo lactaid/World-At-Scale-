@@ -28,7 +28,7 @@
 **Ingresar el siguiente código dentro de cmd o anaconda (de preferencia anaconda para que se ponga en el PATH automáticamente):**
 
 <ul>
-  <li>OpenCV / cv2:
+  <li><b>OpenCV / cv2:</b>
     <ul>
       <li>pip install opencv-python</li>
       <li>pip install opencv-contrib-python</li>
@@ -38,7 +38,7 @@
     </ul>
    </li>
    
-  <li>Matplotlib
+  <li><b>Matplotlib:</b>
   <ul>
       <li>pip install matplotlib</li>
     </ul>
@@ -47,22 +47,21 @@
 </ul>
 
 <br>
-
 **Estas se supone que ya vienen instaladas (si no, usar pip install con el nombre correspondiente):**
 <ul>
-  <li>Numpy
+  <li><b>Numpy</b>
   <ul>
       <li>pip install numpy</li>
     </ul>
   </li>
   
-  <li>PIL
+  <li><b>PIL</b>
   <ul>
       <li>pip install Pillow</li>
     </ul>
   </li>
   
-  <li>tkinter
+  <li><b>tkinter</b>
     <ul>
       <li>pip install tkinter</li>
     </ul>
