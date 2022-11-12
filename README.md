@@ -25,8 +25,9 @@
 <!-- Descargas -->
 <h2 id="Descargas"> 🐍 Descargas necesarias: </h2>
 
-**Ingresar el siguiente código dentro de cmd o anaconda (de preferencia anaconda para que se ponga en el PATH automáticamente):**
+**Ingresar el siguiente código dentro de cmd o anaconda (de preferencia Anaconda para que se ponga en el PATH automáticamente):**
 
+**(Si NO se usa Anaconda, incluir el -python al final, de lo contrario, omitirlo).**
 <ul>
   <li><b>OpenCV / cv2:</b>
     <ul>
