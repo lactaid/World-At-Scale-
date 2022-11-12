@@ -19,25 +19,46 @@
 - PIL import Image - Pillow, nos permite trabajar con imagenes
 - cv2 - nos permite trabajar con imagenes y modificarlas
 - tkinter
-- 
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)
 
 <!-- Descargas -->
 <h2 id="Descargas"> 🐍 Descargas necesarias: </h2>
 
-Ingresar el siguiente código dentro de cmd o anaconda (de preferencia anaconda para que se ponga en el PATH automáticamente):
+**Ingresar el siguiente código dentro de cmd o anaconda (de preferencia anaconda para que se ponga en el PATH automáticamente):**
 
-- OpenCV / cv2:
+<ul>
+  <li>OpenCV / cv2:
+    <ul>
+      <li>pip install opencv-python</li>
+      <li>pip install opencv-contrib-python</li>
+    </ul>
+   </li>
+</ul>
 
-pip install opencv-python
-
-pip install opencv-contrib-python
+<br>
 
 **Estas se supone que ya vienen instaladas (si no, usar pip install con el nombre correspondiente):**
+<ul>
+  <li>Numpy
+  <ul>
+      <li>pip install Numpy-python</li>
+    </ul>
+  </li>
+  
+  <li>PIL
+  <ul>
+      <li>pip install Pillow-python</li>
+    </ul>
+  </li>
+  
+  <li>tkinter
+    <ul>
+      <li>pip install tkinter-python</li>
+    </ul>
+  </li>
+</ul>
 
-- Numpy
-- PIL
-- tkinter
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)
 <!-- Links -->
