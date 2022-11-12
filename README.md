@@ -73,11 +73,20 @@
 <!-- Links -->
 <h2 id="Links"> 👉 Links útiles: </h2>
 
-- Create a Image Viewer App using Python | Python: https://www.youtube.com/watch?v=l4ifwGaWyKo&ab_channel=ParvatComputerTechnology
-- Using OpenCV to mark points and store the coordinates on an image in Python: https://www.youtube.com/watch?v=0iSM5Br-UVs&ab_channel=RohanRouth
-- Measure the size of an object | with Opencv, Aruco marker and Python: https://www.youtube.com/watch?v=lbgl2u6KrDU&t=221s&ab_channel=Pysource
-- How to Use Background Subtraction Methods: https://docs.opencv.org/4.x/d1/dc5/tutorial_background_subtraction.html  
-- Python Package Index : https://pypi.org/
+- Create a Image Viewer App using Python | Python: https://youtu.be/l4ifwGaWyKo
+- Using OpenCV to mark points and store the coordinates on an image in Python:https://youtu.be/0iSM5Br-UVs 
+- Colab: https://colab.research.google.com/drive/1npN27gNzDLESxzWEFUYQakvewWCzjxZa?usp=sharing
+- Aspect Ratio of a Rectangle in Perspective: http://andrewkay.name/blog/post/aspect-ratio-of-a-rectangle-in-perspective/
+- Python Package Index (para las instalaciones): https://pypi.org/
 - Decoracion para markdown: https://github.com/andreasbm/readme
+<!-- - Measure the size of an object | with Opencv, Aruco marker and Python: https://www.youtube.com/watch?v=lbgl2u6KrDU&t=221s&ab_channel=Pysource -->
+<!-- - How to Use Background Subtraction Methods: https://docs.opencv.org/4.x/d1/dc5/tutorial_background_subtraction.html  -->
 
 ![](https://www.gran-turismo.com/gtsport/decal/6917621470574151192_1.png)
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)
+
+<h2 id="Notas"> 📝 Notas: </h2>
+
+- El archivo de new.jpg es la imagen que produce el programa con los 4 puntos, el lugar donde se guarda se puede cambiar después.
+- Hay otras notas sobre cambios dentro del programa.
