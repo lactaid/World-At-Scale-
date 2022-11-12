@@ -1,5 +1,7 @@
-
-# World-At-Scale
+<p align="center"> 
+  <img src="/medidor objetos/images/azul.gif" alt="Azul" width="80px" height="80px">
+</p>
+<h1 align="center"> World-At-Scale </h1>
 
 ## El programa es [nebraska2.py](https://github.com/lactaid/World-At-Scale-/blob/b89f42cb97ffa76a064ea5aca833acf8296a8cd6/medidor%20objetos/nebraska2.py)
 
