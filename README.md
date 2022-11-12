@@ -6,19 +6,19 @@
 <h2 align="center"> Programa: <a href="https://www.concordia.ca/](https://github.com/lactaid/World-At-Scale-/blob/b89f42cb97ffa76a064ea5aca833acf8296a8cd6/medidor%20objetos/nebraska2.py)">nebraska2.py</a> 
   <p></p>
 <p align="center"> 
-  <img src="https://media.tenor.com/d0UTIPbEt5gAAAAC/the-world-is-yours-ship.gif" alt="world">
+  <img src="/medidor objetos/images/scarface.gif" alt="world">
 </p> </h2>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)
 <!-- ABOUT -->
 <h2 id="Librerias"> 📚 Librerias usadas: </h2>
 
-- numpy - operaciones matematicas
-- time - eventos relacionados a tiempo
-- cmath - en el caso de las raices cuadradas, nos permite regresar valores imaginarios
-- PIL import Image - Pillow, nos permite trabajar con imagenes
-- cv2 - nos permite trabajar con imagenes y modificarlas
-- tkinter
+- **numpy** - operaciones matematicas
+- **time** - eventos relacionados a tiempo
+- **cmath** - en el caso de las raices cuadradas, nos permite regresar valores imaginarios
+- **PIL** import Image - Pillow, nos permite trabajar con imagenes
+- **cv2** - nos permite trabajar con imagenes y modificarlas
+- **tkinter** - nos permite crear aplicaciones con python
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)
 
