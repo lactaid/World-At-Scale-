@@ -1,7 +1,7 @@
 import numpy as np
 import time
 import cmath
-from PIL import Image
+from PIL import Image, ImageFont, ImageDraw
 
 import cv2
 
@@ -41,20 +41,24 @@ def mousePoints(event, x, y, flags, params):
 
 
 # img ahora vale la imagen original
-img = cv2.imread('medidor objetos\images\minecraft 3.png')
-# cv2.imshow('image', img)
+im = cv2.imread('medidor objetos\images\minecraft.jpg')  # abrimos la imagen
+img = cv2.resize(im, (960, 540))  # hacemos resize
+cv2.imshow('image', img)  # mostramos la imagen original, con el nombre image
+# llamamos al la funcion de cv2 setMouseCallback con image y mousePoints
 cv2.setMouseCallback("image", mousePoints)
 
-cv2.waitKey(0)
+cv2.waitKey(0)  # espera al input del usuario para terminar
 
 # encontrar el centro
-image = Image.open('medidor objetos\images\minecraft 3.png')
+# usamosla libreria Image, parte de Pillow, y la funcion Image.open para abrir la imagen original
+image = Image.open('medidor objetos\images\minecraft.jpg')
+# en image,size se alamacenan las medidas de la imagen en una lista, basta con dividir ambas /2 para encontrar el centro
 centroX = image.size[0]/2
 centroY = image.size[1]/2
-print('size: ', image.size)
-print('coords: ', centroX, centroY)
+print('size: ', image.size)  # ver tamaño original
+print('coords: ', centroX, centroY)  # ver la posicion xy del centro
 
-for i in range(len(xc)):
+for i in range(len(xc)):  # el valor de las coordenadas ahora se basa en el centro
     if xc[i] >= centroX:
         xc[i] = -(centroX - xc[i])
     else:
@@ -66,8 +70,9 @@ for i in range(len(yc)):
     else:
         yc[i] = yc[i] - centroY
 
-print(xc, yc)
-# Imagen tomada en cetys
+print(xc, yc)  # comprobamos los nuevos valores de xc y yc
+
+# Ratio
 ax = xc[0]
 ay = yc[0]
 bx = xc[1]
@@ -137,4 +142,11 @@ v = cmath.sqrt(vx**2+vy**2+vz**2)
 if np.isnan((v/u)):
     print("Hubo un error, intenta otra vez por favor")
 else:
-    print("Ratio: ", (v/u).real)  # para que imprima el numero real
+    ratio = ("%.2f" % (v/u).real)
+    font = cv2.FONT_HERSHEY_TRIPLEX
+    print("Ratio: ", ratio)  # para que imprima el numero real
+    img = cv2.rectangle(img, (8, 470), (199, 511), (0, 0, 0), -1)
+    cv2.putText(img, 'Ratio: '+str(ratio), (10, 500), font, 1, (0, 0, 255), 2)
+
+    cv2.imshow('image', img)
+    cv2.waitKey(0)
