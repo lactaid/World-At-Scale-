@@ -8,7 +8,7 @@ import cv2  # nos permite trabajar con imagenes y modificarlas
 # from tkinter import *
 # from tkinter import filedialog
 # import tkinter as tk
-# Todavia no se usan
+# ^ Todavia no se usan
 
 
 '''
@@ -18,6 +18,7 @@ porque este ultimo no es 100% exacto.
 - Una vez seleccionados los 4, presionar esc o cerra la ventana.
 - Cuando esto suceda, el programa calculara las coordenadas junto con el ratio
 -El programa volvera a abrir la imagen, esta vez con los resultados en pantalla.
+
 '''
 
 '''
@@ -74,7 +75,7 @@ def imgRatio():
 
     # encontrar el centro
     # usamosla libreria Image, parte de Pillow, y la funcion Image.open para abrir la imagen original
-    image = Image.open('medidor objetos\images\minecraft.jpg')
+    image = Image.open('new.jpg')
     # en image,size se alamacenan las medidas de la imagen en una lista, basta con dividir ambas /2 para encontrar el centro
     centroX = image.size[0]/2
     centroY = image.size[1]/2
@@ -195,7 +196,7 @@ while repetir == True:
         repetir = True
 
 
-# Codigo viejo que probablemente ya no se necesite
+# ====== Codigo viejo que probablemente ya no se necesite ======
 
 # xc = []  # lista de coordenadas x, se asignaban antes de la funcion antes
 
