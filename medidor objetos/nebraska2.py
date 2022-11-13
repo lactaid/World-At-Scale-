@@ -28,6 +28,10 @@ Mejoras a futuro:
 
 '''
 
+'''
+Hacer que el resize dependa de la resolucion de la imagen
+'''
+
 
 def imgRatio():
     print("-"*100)
@@ -64,8 +68,8 @@ def imgRatio():
 
     # img ahora vale la imagen original
     # abrimos la imagen
-    im = cv2.imread('medidor objetos\images\minecraft.jpg')
-    img = cv2.resize(im, (960, 540))  # hacemos resize
+    img = cv2.imread('medidor objetos\images\minecraft 3.png')
+    # img = cv2.resize(im, (960, 540))  # hacemos resize
     # mostramos la imagen original, con el nombre image
     cv2.imshow('image', img)
     # llamamos al la funcion de cv2 setMouseCallback con image y mousePoints
