@@ -3,7 +3,9 @@
 </p>
 <h1 align="center"> World-At-Scale </h1>
 
-<h2 align="center"> Programa: <a href="medidor_objetos/nebraska2.py">nebraska2.py</a> 
+<h2 align="center"> Programa: <a href="medidor_objetos/nebraska2.py">nebraska2.py</a> </h2>
+<h3 align="center"><a href="  Cambios y planes.txt"> Ver Cambios</a>  </h3>
+
   <p></p>
 <p align="center"> 
   <img src="/medidor_objetos/images/scarface.gif" alt="world">
