@@ -1,0 +1,13 @@
+--Instrucciones de uso--
+1. Seleccionar el archivo de la imagen deseada.
+2. Indicar el punto A B C y D dentro de la imagen.
+(asegurarse de elegir una forma rectangular o cuadrada, o algo similar)
+Los puntos siempre van en el siguiente orden:
+
+   C    D
+   
+   A    B
+
+3. Despues de hacer la seleccion, presionar esc para obtener los resultados
+4. Si regresa error, presionar esc para intentar de nuevo
+(Por lo general, estos suceden por una diferencia minima de pixeles, asi que puedes seguir intentando con la misma forma)
