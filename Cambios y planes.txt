@@ -11,3 +11,5 @@
 	para saber si hacerla más grande, más chica, o dejarla igual.)
 	- Usando el ratio obtenido, encontrar el tamaño de otro objeto en la imágen basándose en una medida real, de preferencia,
 	usando la misma técnica de elegir los puntos en la imágen para no complicar las cosas. 
+
+:)
