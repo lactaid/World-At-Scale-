@@ -6,7 +6,7 @@
 <h2 align="center"> Programa: <a href="https://www.concordia.ca/](https://github.com/lactaid/World-At-Scale-/blob/b89f42cb97ffa76a064ea5aca833acf8296a8cd6/medidor%20objetos/nebraska2.py)">nebraska2.py</a> 
   <p></p>
 <p align="center"> 
-  <img src="/medidor objetos/images/scarface.gif" alt="world">
+  <img src="/medidor_objetos/images/scarface.gif" alt="world">
 </p> </h2>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)
