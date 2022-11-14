@@ -3,7 +3,7 @@
 </p>
 <h1 align="center"> World-At-Scale </h1>
 
-<h2 align="center"> Programa: <a href="medidor_objetos/nebraska2.py)">nebraska2.py</a> 
+<h2 align="center"> Programa: <a href="medidor_objetos/nebraska2.py">nebraska2.py</a> 
   <p></p>
 <p align="center"> 
   <img src="/medidor_objetos/images/scarface.gif" alt="world">
