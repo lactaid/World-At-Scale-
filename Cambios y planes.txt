@@ -1,0 +1,13 @@
+13/11/2022:
+- Se agrego la funcionalidad de tkinter, ahora funciona como app
+- El path de la imagen creada durante el proceso (new.jpg) se cambió a la carpeta recursos 
+  -> World-At-Scale-\medidor_objetos\recursos
+- De igual manera, la operación para encontrar el centro se basa en esta nueva imagen
+- Imagen placeholder de instrucciones que se muestra en la app
+
+- Lo que falta:
+	- Encontrar una buena manera de mantener consistente el tamaño de la imagen producida. (Que sea de buen tamaño, para que
+	el usuario pueda seleccionar los puntos con precisión, probablemente se necesite determinar primero el tamaño de la imágen
+	para saber si hacerla más grande, más chica, o dejarla igual.)
+	- Usando el ratio obtenido, encontrar el tamaño de otro objeto en la imágen basándose en una medida real, de preferencia,
+	usando la misma técnica de elegir los puntos en la imágen para no complicar las cosas. 
