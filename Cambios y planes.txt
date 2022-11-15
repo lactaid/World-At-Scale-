@@ -13,3 +13,10 @@
 	usando la misma técnica de elegir los puntos en la imágen para no complicar las cosas. 
 
 :)
+
+14/11/2022:
+- Se agrego la funcion de cross ratio dentro del programa, el usuario puede elegir las 4 esquinas del objeto que quiere analizar
+
+-Lo que falta:
+	- Hacer un metodo para determinar la escala de la imagen(puede que esto ya no sea tan necesario).
+	- Hacer que el usuario pueda hacer input de la medida de el lado horizontal o vertical.
