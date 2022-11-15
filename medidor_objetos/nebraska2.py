@@ -66,7 +66,7 @@ def imgRatio(img_path):
                 cv2.putText(img, 'D', (x, y), font, 1, (255, 249, 0), 2)
 
             else:
-                cv2.putText(img, '.', (x, y), font, 1, (255, 249, 0), 3)
+                cv2.putText(img, '', (x, y), font, 1, (255, 249, 0), 3)
             # creamos una nueva imagen con la tag de img
             # AQUI SE GUARDA LA NUEVA IMAGEN
             cv2.imwrite('medidor_objetos/recursos/new.jpg', img)
@@ -79,7 +79,10 @@ def imgRatio(img_path):
     img = cv2.imread(img_path)
 
     # img = cv2.resize(im, (960, 540))  # hacemos resize leer arriba !!!!!!!!!
-
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    img = cv2.rectangle(img, (8, 20), (550, 60), (0, 0, 0), -1)
+    cv2.putText(img, 'Selecciona los puntos A B C y D ',
+                (10, 50), font, 1, (255, 249, 0), 2)
     # mostramos la imagen original, con el nombre image
     cv2.imshow('image', img)
     # llamamos al la funcion de cv2 setMouseCallback con image y mousePoints
@@ -193,10 +196,176 @@ def imgRatio(img_path):
 
         cv2.imshow('image', img)  # mostramos el resultado
         cv2.waitKey(0)
-
+        CrossRatio(xc, yc, centroX, centroY, (v/u).real)
         success = True  # regresamos true
 
     return success
+
+# Calcula la distancia a una ventana con respecto a los bordes de la estructura principal
+
+
+def CrossRatio(xc, yc, centroX, centroY, ratio):
+    # Para seleccionar los 4 puntos de la ventana
+    print("-"*100)
+    print("\nDistancia a objeto\n")
+    print("-"*100)
+    px = []
+    py = []
+
+    def mousePoints2(event, x, y, flags, params):
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        if event == cv2.EVENT_LBUTTONDOWN:  # funcion de cv2 para detectar input de mouse
+            print(x, y)  # imprimimos las coordenadas obtenidas
+            px.append(x)  # agregamos la coordenada a la lista de px y py
+            py.append(y)
+            if len(px) == 1:  # se despliega el nombre de la coordenada dependiendo de que tantos elementos esten en la lista xc, una vez que supera 4, ya no se toma en cuenta
+                cv2.putText(img, 'a', (x, y), font, 1, (255, 0, 255), 2)
+
+            elif len(px) == 2:
+                cv2.putText(img, 'b', (x, y), font, 1, (255, 0, 255), 2)
+
+            elif len(px) == 3:
+                cv2.putText(img, 'c', (x, y), font, 1, (255, 0, 255), 2)
+
+            elif len(px) == 4:
+                cv2.putText(img, 'd', (x, y), font, 1, (255, 0, 255), 2)
+
+            else:
+                cv2.putText(img, '.', (x, y), font, 1, (255, 0, 255), 3)
+            # creamos una nueva imagen con la tag de img
+            cv2.imwrite('medidor_objetos/recursos/new.jpg', img)
+            # mostramos el resultado al finalizar cada instancia
+            cv2.imshow('image', img)
+
+    # img ahora vale la imagen original
+    # abrimos la imagen
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    img = cv2.imread('medidor_objetos/recursos/new.jpg')
+    img = cv2.rectangle(img, (8, 20), (640, 60), (0, 0, 0), -1)
+    cv2.putText(img, 'Ahora selecciona los puntos del objeto ',
+                (10, 50), font, 1, (255, 0, 255), 2)
+    # img = cv2.resize(im, (750, 1333))  # hacemos resize
+    # mostramos la imagen original, con el nombre image
+    cv2.imshow('image', img)
+    # llamamos al la funcion de cv2 setMouseCallback con image y mousePoints
+    cv2.setMouseCallback("image", mousePoints2)
+    cv2.waitKey(0)
+    # # Estos son los cuatro vértices de la estructura principal, se añade una tercera dimensión en "z" = 1
+
+    P1 = np.array([xc[0], yc[0], 1])  # Bottom left
+    P2 = np.array([xc[1], yc[1], 1])  # Bottom right
+    P3 = np.array([xc[2], yc[2], 1])  # Upper left
+    P4 = np.array([xc[3], yc[3], 1])  # Upper right
+    print(P1, P2, P3, P4)
+    # Se calculan cuatro rectas de la estructura principal, el formato es [ax, by, c] = 0
+    L1 = np.cross(P1, P3)  # Linea vertical izquierda
+    L2 = np.cross(P2, P4)  # Linea vertical derecha
+    L3 = np.cross(P3, P4)  # Linea horizontal superior
+    L4 = np.cross(P1, P2)  # Linea horizontal inferior
+
+    for i in range(len(px)):  # El valor de las coordenadas con respecto al centro de la imagen
+        if px[i] >= centroX:
+            px[i] = np.abs(px[i] - centroX)
+        else:
+            px[i] = -np.abs(px[i] - centroX)
+
+    for i in range(len(py)):
+        if py[i] >= centroY:
+            py[i] = -np.abs(py[i] - centroY)
+        else:
+            py[i] = np.abs(py[i] - centroY)
+    # Estos son los cuatro vértices de la ventana, cartel, etc.
+    p1 = np.array([px[0], py[0], 1])  # Bottom left
+    p2 = np.array([px[1], py[1], 1])  # Bottom right
+    p3 = np.array([px[2], py[2], 1])  # Upper left
+    p4 = np.array([px[3], py[3], 1])  # Upper right
+    # Se calculan cuatro rectas de la segunda estructura, el formato es [ax, by, c] = 0
+    l1 = np.cross(p1, p3)  # Linea vertical izquierda
+    l2 = np.cross(p2, p4)  # Linea vertical derecha
+    l3 = np.cross(p3, p4)  # Linea horizontal superior
+    l4 = np.cross(p1, p2)  # Linea horizontal inferior
+
+    # Punto de horizonte, el formato del punto debe quedar [ax, by, 1]
+    vph = np.cross(L3, L4)  # Horizontal
+    vph = vph / vph[2]
+    vpv = np.cross(L1, L2)  # Vertical
+    vpv = vpv / vpv[2]
+
+    # Intersecciones x
+    # Nota: Todas las distancias se encuentran en función del tamaño horizontal
+    # De igual forma la interpretación de las distancias dependerá de la localización del punto de horizonte
+    print("\nDistancia Horizontal 1\n")
+    C1 = np.cross(L3, l1)  # Punto de intersección
+    C1 = C1 / C1[2]
+    # Para calcular distancia entre dos puntos se usa esta función
+    BD = np.linalg.norm(P3-P4)
+    AC = np.linalg.norm(vph-C1)
+    # Si el punto de horizonte se encuentra a la derecha
+    if np.linalg.norm(vph-P4) < np.linalg.norm(vph-P3):
+        BC = np.linalg.norm(C1-P4)
+        AD = np.linalg.norm(vph-P3)
+    else:  # Si el punto de horizonte se encuentra a la izquierda
+        BC = np.linalg.norm(P3-C1)
+        AD = np.linalg.norm(P3-vph)
+
+    CR = (AC*BD) / (BC*AD)  # Cross ratio
+
+    dist = 1 / CR  # Posteriormente se debe multiplicar este valor por el tamaño horizontal
+    print(dist)
+
+    print("\nDistancia Horizontal 2\n")
+    C2 = np.cross(L3, l2)  # Punto de intersección
+    C2 = C2 / C2[2]
+    AC = np.linalg.norm(vph-C2)
+    if np.linalg.norm(vph-P4) < np.linalg.norm(vph-P3):  # Punto de horizonte a la derecha
+        BC = np.linalg.norm(C2-P4)
+        AD = np.linalg.norm(vph-P3)
+    else:  # Punto de horizonte a la izquierda
+        BC = np.linalg.norm(P3-C2)
+        AD = np.linalg.norm(P3-vph)
+
+    CR = (AC*BD) / (BC*AD)  # Cross ratio
+
+    dist = 1 / CR  # Posteriormente se debe multiplicar este valor por el tamaño horizontal
+    print(dist)
+
+    # Intersecciones y
+
+    # De igual forma la interpretación de las distancias dependerá de la localización del punto de horizonte
+    print("\nDistancia Vertical 1\n")
+    C3 = np.cross(L1, l3)  # Punto de intersección
+    C3 = C3 / C3[2]
+
+    BD = np.linalg.norm(P1-P3)
+    AC = np.linalg.norm(vpv-C3)
+    # Si el punto de horizonte se encuentra abajo
+    if np.linalg.norm(vpv-P1) < np.linalg.norm(vpv-P3):
+        BC = np.linalg.norm(C3-P1)
+        AD = np.linalg.norm(vpv-P3)
+    else:  # Si el punto de horizonte se encuentra arriba
+        BC = np.linalg.norm(P3-C3)
+        AD = np.linalg.norm(P1-vpv)
+
+    CR = (AC*BD) / (BC*AD)  # Cross ratio
+
+    dist = ratio / CR  # Como está en función del tamaño horizontal, reemplazamos con el aspect ratio de la estructura original
+    print(dist)
+    print("\nDistancia Vertical 2\n")
+    C4 = np.cross(L1, l4)  # Punto de intersección
+    C4 = C4 / C4[2]
+    AC = np.linalg.norm(vpv-C4)
+    # Si el punto de horizonte se encuentra abajo
+    if np.linalg.norm(vpv-P1) < np.linalg.norm(vpv-P3):
+        BC = np.linalg.norm(C4-P1)
+        AD = np.linalg.norm(vpv-P3)
+    else:  # Si el punto de horizonte se encuentra arriba
+        BC = np.linalg.norm(P3-C4)
+        AD = np.linalg.norm(P1-vpv)
+
+    CR = (AC*BD) / (BC*AD)  # Cross ratio
+
+    dist = ratio / CR  # Como está en función del tamaño horizontal, reemplazamos con el aspect ratio de la estructura original
+    print(dist)
 
 
 def calcular():
