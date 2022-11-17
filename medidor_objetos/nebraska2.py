@@ -2,7 +2,6 @@ import numpy as np  # operaciones matematicas
 import time  # eventos relacionados a tiempo
 import cmath  # en el caso de las raices cuadradas, nos permite regresar valores imaginarios
 
-
 import cv2  # nos permite trabajar con imagenes y modificarlas
 
 from tkinter import *  # esto nos permite hacer aplicaciones
@@ -13,7 +12,6 @@ import os  # nos permite acceder al file explorer
 # PIL SIEMPRE DEBE IR DESPUES DE TKINTER, YA QUE TIENE SU PROPIA FUNCION IMAGE QUE REEMPLAZA A LA DE PIL
 # Pillow, nos permite trabajar con imagenes
 from PIL import Image, ImageFont, ImageDraw, ImageTk
-
 
 '''
 Funcionamiento basico:
@@ -37,7 +35,7 @@ Hacer que el resize dependa de la resolucion de la imagen
 '''
 
 img_path = ""  # aqui se guarda el path que donde el usuario elige su propia imagen, su funcionamiento se ve en la funcion de calcular
-
+contador = 0
 
 def imgRatio(img_path):
     print("-"*100)
@@ -45,14 +43,20 @@ def imgRatio(img_path):
     print("-"*100)
     xc = []  # lista de coordenadas x
     yc = []  # lista de coordenadas en y
+    circles = np.zeros((4, 2), np.int)
+    
     print("Coordenadas originales: ")
 
     def mousePoints(event, x, y, flags, params):
+        global contador
         font = cv2.FONT_HERSHEY_SIMPLEX
         if event == cv2.EVENT_LBUTTONDOWN:  # funcion de cv2 para detectar input de mouse
             print(x, y)  # imprimimos las coordenadas obtenidas
             xc.append(x)  # agregamos la coordenada a la lista de xc y yc
             yc.append(y)
+            circles[contador] = x, y
+            contador += 1
+
             if len(xc) == 1:  # se despliega el nombre de la coordenada dependiendo de que tantos elementos esten en la lista xc, una vez que supera 4, ya no se toma en cuenta
                 cv2.putText(img, 'A', (x, y), font, 1, (255, 249, 0), 2)
 
@@ -77,6 +81,7 @@ def imgRatio(img_path):
     # abrimos la imagen
 
     img = cv2.imread(img_path)
+    copy = cv2.imread(img_path)
 
     # img = cv2.resize(im, (960, 540))  # hacemos resize leer arriba !!!!!!!!!
     font = cv2.FONT_HERSHEY_SIMPLEX
@@ -183,6 +188,8 @@ def imgRatio(img_path):
         cv2.putText(img, 'Error, por favor presiona esc para reiniciar ',
                     (10, 500), font, 1, (0, 0, 255), 2)
 
+        global contador
+        contador = 0
         cv2.imshow('image', img)
         cv2.waitKey(0)\
 
@@ -195,9 +202,12 @@ def imgRatio(img_path):
                     (10, 500), font, 1, (0, 0, 255), 2)
 
         cv2.imshow('image', img)  # mostramos el resultado
+        warp(copy, circles, float(ratio))
         cv2.waitKey(0)
         CrossRatio(xc, yc, centroX, centroY, (v/u).real)
         success = True  # regresamos true
+
+        
 
     return success
 
@@ -382,8 +392,32 @@ def calcular():
             print("Hubo un error, intenta otra vez por favor")
             repetir = True
 
-# ==============MAIN==============
+def warp(img, circles, a_ratio):
 
+    temp = [circles[0], circles[2], circles[3], circles[1]]
+    width = cmath.sqrt(Area(temp)/a_ratio).real
+    height = width*a_ratio
+
+    pts1 = np.float32([circles[2], circles[3], circles[0], circles[1]])
+    pts2 = np.float32([[0,0], [width, 0], [0, height], [width, height]])
+    matrix = cv2.getPerspectiveTransform(pts1, pts2)
+    imgw = cv2.warpPerspective(img, matrix, (int(width), int(height)))
+
+    cv2.imshow("WARP", imgw)
+    #cv2.imwrite('area.jpg', imgw)
+
+def Area(corners):
+    n = 4 # of corners
+    area = 0.0
+    for i in range(n):
+        j = (i + 1) % n
+        area += corners[i][0] * corners[j][1]
+        area -= corners[j][0] * corners[i][1]
+    area = abs(area) / 2.0
+    return area
+
+
+# ==============MAIN==============
 
 root = Tk()  # app tkinter
 root.title("World At Scale")  # titulo
@@ -404,7 +438,7 @@ label_image['image'] = inst  # mostramos la imagen
 # inst.close()
 
 
-btn = Button(root, text="Seleccionar Imagen", fg='white', bg='#5300A8', highlightthickness=5, borderwidth=5,
+btn = Button(root, text="Seleccionar Imagen", fg='blue', bg='#5300A8', highlightthickness=5, borderwidth=5,
              relief=RIDGE, height=1, width=12, font=("normal", 13), padx=15, pady=1, command=calcular)  # creamos un boton que inicie la funcion de calcular
 
 # placement del boton de calcular
