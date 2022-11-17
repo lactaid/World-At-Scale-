@@ -28,7 +28,7 @@
 
 **Ingresar el siguiente código dentro de cmd o anaconda (de preferencia Anaconda para que se ponga en el PATH automáticamente):**
 
-**(Si NO se usa Anaconda, incluir el -python al final, de lo contrario, omitirlo).**
+**(Si NO se usa Anaconda, incluir el -python al final, de lo contrario, omitirlo)(Si usas anaconda en mac, también debes incluir el -python al final al descargar opencv).**
 <ul>
   <li><b>OpenCV / cv2:</b>
     <ul>
