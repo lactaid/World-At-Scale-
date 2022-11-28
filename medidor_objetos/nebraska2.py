@@ -37,6 +37,7 @@ Hacer que el resize dependa de la resolucion de la imagen
 img_path = ""  # aqui se guarda el path que donde el usuario elige su propia imagen, su funcionamiento se ve en la funcion de calcular
 contador = 0
 
+
 def imgRatio(img_path):
     print("-"*100)
     print("\nWorld At Scale 1.0\n")
@@ -44,7 +45,7 @@ def imgRatio(img_path):
     xc = []  # lista de coordenadas x
     yc = []  # lista de coordenadas en y
     circles = np.zeros((4, 2), np.int)
-    
+
     print("Coordenadas originales: ")
 
     def mousePoints(event, x, y, flags, params):
@@ -104,11 +105,17 @@ def imgRatio(img_path):
     print('size: ', image.size)  # ver tamaño original
     print('coords: ', centroX, centroY)  # ver la posicion xy del centro
     print("-"*100)
-    for i in range(len(xc)):  # el valor de las coordenadas ahora se basa en el centro
-        xc[i] = xc[i] - centroX
+    for i in range(len(xc)):  # El valor de las coordenadas con respecto al centro de la imagen
+        if xc[i] >= centroX:
+            xc[i] = np.abs(xc[i] - centroX)
+        else:
+            xc[i] = -np.abs(xc[i] - centroX)
 
     for i in range(len(yc)):
-        yc[i] = yc[i] - centroY
+        if yc[i] >= centroY:
+            yc[i] = -np.abs(yc[i] - centroY)
+        else:
+            yc[i] = np.abs(yc[i] - centroY)
 
     print(xc, yc)  # comprobamos los nuevos valores de xc y yc
 
@@ -206,8 +213,6 @@ def imgRatio(img_path):
         cv2.waitKey(0)
         CrossRatio(xc, yc, centroX, centroY, (v/u).real)
         success = True  # regresamos true
-
-        
 
     return success
 
@@ -392,6 +397,7 @@ def calcular():
             print("Hubo un error, intenta otra vez por favor")
             repetir = True
 
+
 def warp(img, circles, a_ratio):
 
     temp = [circles[0], circles[2], circles[3], circles[1]]
@@ -399,15 +405,16 @@ def warp(img, circles, a_ratio):
     height = width*a_ratio
 
     pts1 = np.float32([circles[2], circles[3], circles[0], circles[1]])
-    pts2 = np.float32([[0,0], [width, 0], [0, height], [width, height]])
+    pts2 = np.float32([[0, 0], [width, 0], [0, height], [width, height]])
     matrix = cv2.getPerspectiveTransform(pts1, pts2)
     imgw = cv2.warpPerspective(img, matrix, (int(width), int(height)))
 
     cv2.imshow("WARP", imgw)
     #cv2.imwrite('area.jpg', imgw)
 
+
 def Area(corners):
-    n = 4 # of corners
+    n = 4  # of corners
     area = 0.0
     for i in range(n):
         j = (i + 1) % n
@@ -438,7 +445,7 @@ label_image['image'] = inst  # mostramos la imagen
 # inst.close()
 
 
-btn = Button(root, text="Seleccionar Imagen", fg='blue', bg='#5300A8', highlightthickness=5, borderwidth=5,
+btn = Button(root, text="Seleccionar Imagen", fg='white', bg='#5300A8', highlightthickness=5, borderwidth=5,
              relief=RIDGE, height=1, width=12, font=("normal", 13), padx=15, pady=1, command=calcular)  # creamos un boton que inicie la funcion de calcular
 
 # placement del boton de calcular
