@@ -37,7 +37,6 @@ Hacer que el resize dependa de la resolucion de la imagen
 img_path = ""  # aqui se guarda el path que donde el usuario elige su propia imagen, su funcionamiento se ve en la funcion de calcular
 contador = 0
 
-
 def imgRatio(img_path):
     print("-"*100)
     print("\nWorld At Scale 1.0\n")
@@ -45,7 +44,7 @@ def imgRatio(img_path):
     xc = []  # lista de coordenadas x
     yc = []  # lista de coordenadas en y
     circles = np.zeros((4, 2), np.int)
-
+    
     print("Coordenadas originales: ")
 
     def mousePoints(event, x, y, flags, params):
@@ -201,7 +200,7 @@ def imgRatio(img_path):
         cv2.waitKey(0)\
 
     else:
-        ratio = ("%.2f" % (v/u).real)  # si no hay errores, mostamos el ratio
+        ratio = ("%.3f" % (v/u).real)  # si no hay errores, mostamos el ratio
         font = cv2.FONT_HERSHEY_TRIPLEX
         print("Ratio: ", ratio)  # para que imprima el numero real
         img = cv2.rectangle(img, (8, 470), (199, 511), (0, 0, 0), -1)
@@ -211,8 +210,11 @@ def imgRatio(img_path):
         cv2.imshow('image', img)  # mostramos el resultado
         warp(copy, circles, float(ratio))
         cv2.waitKey(0)
-        CrossRatio(xc, yc, centroX, centroY, (v/u).real)
+        infosize = CrossRatio(xc, yc, centroX, centroY, (v/u).real)
+        Realsize(infosize[0], infosize[1], infosize[2], (v/u).real)
         success = True  # regresamos true
+
+        
 
     return success
 
@@ -226,7 +228,6 @@ def CrossRatio(xc, yc, centroX, centroY, ratio):
     print("-"*100)
     px = []
     py = []
-
     def mousePoints2(event, x, y, flags, params):
         font = cv2.FONT_HERSHEY_SIMPLEX
         if event == cv2.EVENT_LBUTTONDOWN:  # funcion de cv2 para detectar input de mouse
@@ -266,7 +267,9 @@ def CrossRatio(xc, yc, centroX, centroY, ratio):
     cv2.setMouseCallback("image", mousePoints2)
     cv2.waitKey(0)
     # # Estos son los cuatro vértices de la estructura principal, se añade una tercera dimensión en "z" = 1
-
+    vphband = 'None'
+    vpvband = 'None'
+    dist = []
     P1 = np.array([xc[0], yc[0], 1])  # Bottom left
     P2 = np.array([xc[1], yc[1], 1])  # Bottom right
     P3 = np.array([xc[2], yc[2], 1])  # Upper left
@@ -317,16 +320,18 @@ def CrossRatio(xc, yc, centroX, centroY, ratio):
     AC = np.linalg.norm(vph-C1)
     # Si el punto de horizonte se encuentra a la derecha
     if np.linalg.norm(vph-P4) < np.linalg.norm(vph-P3):
+        vphband = 'right'
         BC = np.linalg.norm(C1-P4)
         AD = np.linalg.norm(vph-P3)
     else:  # Si el punto de horizonte se encuentra a la izquierda
+        vphband = 'left'
         BC = np.linalg.norm(P3-C1)
         AD = np.linalg.norm(P3-vph)
 
     CR = (AC*BD) / (BC*AD)  # Cross ratio
 
-    dist = 1 / CR  # Posteriormente se debe multiplicar este valor por el tamaño horizontal
-    print(dist)
+    dist.append(1 / CR)  # Posteriormente se debe multiplicar este valor por el tamaño horizontal
+    print(dist[0])
 
     print("\nDistancia Horizontal 2\n")
     C2 = np.cross(L3, l2)  # Punto de intersección
@@ -341,8 +346,8 @@ def CrossRatio(xc, yc, centroX, centroY, ratio):
 
     CR = (AC*BD) / (BC*AD)  # Cross ratio
 
-    dist = 1 / CR  # Posteriormente se debe multiplicar este valor por el tamaño horizontal
-    print(dist)
+    dist.append(1 / CR)  # Posteriormente se debe multiplicar este valor por el tamaño horizontal
+    print(dist[1])
 
     # Intersecciones y
 
@@ -355,16 +360,18 @@ def CrossRatio(xc, yc, centroX, centroY, ratio):
     AC = np.linalg.norm(vpv-C3)
     # Si el punto de horizonte se encuentra abajo
     if np.linalg.norm(vpv-P1) < np.linalg.norm(vpv-P3):
+        vpvband = 'down'
         BC = np.linalg.norm(C3-P1)
         AD = np.linalg.norm(vpv-P3)
     else:  # Si el punto de horizonte se encuentra arriba
+        vpvband = 'up'
         BC = np.linalg.norm(P3-C3)
         AD = np.linalg.norm(P1-vpv)
 
     CR = (AC*BD) / (BC*AD)  # Cross ratio
 
-    dist = ratio / CR  # Como está en función del tamaño horizontal, reemplazamos con el aspect ratio de la estructura original
-    print(dist)
+    dist.append(ratio / CR)  # Como está en función del tamaño horizontal, reemplazamos con el aspect ratio de la estructura original
+    print(dist[2])
     print("\nDistancia Vertical 2\n")
     C4 = np.cross(L1, l4)  # Punto de intersección
     C4 = C4 / C4[2]
@@ -379,9 +386,29 @@ def CrossRatio(xc, yc, centroX, centroY, ratio):
 
     CR = (AC*BD) / (BC*AD)  # Cross ratio
 
-    dist = ratio / CR  # Como está en función del tamaño horizontal, reemplazamos con el aspect ratio de la estructura original
-    print(dist)
+    dist.append(ratio / CR)  # Como está en función del tamaño horizontal, reemplazamos con el aspect ratio de la estructura original
+    print(dist[3])
+    return [dist, vphband, vpvband]
 
+def Realsize(dist, vph, vpv, ratio):
+    side = int(input("\n ¿Qué medida conoce?, vertical(0) u horizontal(1): "))
+    length = float(input("Introduzca el tamaño: "))
+    if side == 0: #Si es vertical
+        length = length / ratio
+        print("La distancia horizontal es: ", length)
+    else:
+        print("La distancia vertical es: ", length*ratio)
+    for i in range(0, len(dist)):
+        dist[i] = np.around(dist[i]*length, decimals=2)
+    
+    if vph == 'left':
+        print("Las distancias hacia el rectángulo desde el borde AC son: ", dist[0], "y", dist[1])
+    else:
+        print("Las distancias hacia el rectángulo desde el borde BD son: ", dist[0], "y", dist[1])
+    if vpv == 'up':
+        print("Las distancias hacia el rectángulo desde el borde CD son: ", dist[2], "y", dist[3])
+    else:
+        print("Las distancias hacia el rectángulo desde el borde AB son: ", dist[2], "y", dist[3])
 
 def calcular():
     global img_path  # accedemos al poth
@@ -397,24 +424,41 @@ def calcular():
             print("Hubo un error, intenta otra vez por favor")
             repetir = True
 
-
 def warp(img, circles, a_ratio):
+    #img = imagen delimitada por los 4 puntos seleccionados por el usuario
+    #circles = arreglo que guarda las coordenadas de los 4 puntos seleccionados por el usuario en la image noriginal
+    #a_ratio = aspect ratio calculado
 
-    temp = [circles[0], circles[2], circles[3], circles[1]]
-    width = cmath.sqrt(Area(temp)/a_ratio).real
-    height = width*a_ratio
+    temp = [circles[0], circles[2], circles[3], circles[1]] #temp se usa para guardar los datos de circles de una manera particular
+                                                            #pues así lo solicita el método de Area
+    width = cmath.sqrt(Area(temp)/a_ratio).real #se calcula el ancho que tendrá la imagen warpeada
+                                                #con base en una fórmula que relaciona el a_ratio con la altura y el ancho
+    height = width*a_ratio #se calcula la altura que tendrá la imagen warpeada 
 
+    #pts1 es para crear un arreglo con las coordenadas acomodadas de una manera específica, 
+    #la cual tiene como primeros dos elementos los puntos superiores del rectángulo, mientras
+    #que los últimos dos elementos representan los puntos inferiores
     pts1 = np.float32([circles[2], circles[3], circles[0], circles[1]])
-    pts2 = np.float32([[0, 0], [width, 0], [0, height], [width, height]])
-    matrix = cv2.getPerspectiveTransform(pts1, pts2)
+
+    #pts2 representa la manera en que queremos que nos acomode en la nueva imagen los datos que le demos-
+    #el primer elemento representa el punto superior izquierdo, el segundo el punto superior derecho, el
+    #tercero el punto inferior izquierdo y el cuarto punto es el inferior derecho
+    pts2 = np.float32([[0,0], [width, 0], [0, height], [width, height]])
+
+    #las variables anteriores son necesarias para obtener una matriz
+    matrix = cv2.getPerspectiveTransform(pts1, pts2) #matriz
+
+    #teniendo todos los datos necesarios, ya podemos llamar al método de warpPerspective.
+    #width y height los hacemos int porque deben de serlo para pasarlos como parámetro, y como
+    #al ser calculados al incio no quedan como números enterros, debemos transformarlos
     imgw = cv2.warpPerspective(img, matrix, (int(width), int(height)))
 
+    #mostramos la imagen warpeada
     cv2.imshow("WARP", imgw)
-    #cv2.imwrite('area.jpg', imgw)
-
+    cv2.imwrite('area.jpg', imgw)
 
 def Area(corners):
-    n = 4  # of corners
+    n = 4 # of corners
     area = 0.0
     for i in range(n):
         j = (i + 1) % n
@@ -445,7 +489,7 @@ label_image['image'] = inst  # mostramos la imagen
 # inst.close()
 
 
-btn = Button(root, text="Seleccionar Imagen", fg='white', bg='#5300A8', highlightthickness=5, borderwidth=5,
+btn = Button(root, text="Seleccionar Imagen", fg='blue', bg='#5300A8', highlightthickness=5, borderwidth=5,
              relief=RIDGE, height=1, width=12, font=("normal", 13), padx=15, pady=1, command=calcular)  # creamos un boton que inicie la funcion de calcular
 
 # placement del boton de calcular
