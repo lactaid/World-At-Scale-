@@ -3,7 +3,7 @@
 </p>
 <h1 align="center"> World-At-Scale </h1>
 
-<h2 align="center"> Programa: <a href="https://www.concordia.ca/](https://github.com/lactaid/World-At-Scale-/blob/b89f42cb97ffa76a064ea5aca833acf8296a8cd6/medidor%20objetos/nebraska2.py)">nebraska2.py</a> </h2>
+<h2 align="center"> Programa: <a href="medidor_objetos/nebraska2.py)">nebraska2.py</a> </h2>
 <h3 align="center"><a href="Cambios y planes.txt">Ver cambios</a> </h3>
   <p></p>
 <p align="center"> 
