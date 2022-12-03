@@ -8,6 +8,12 @@ Los puntos siempre van en el siguiente orden:
    
    A    B
 
-3. Despues de hacer la seleccion, presionar esc para obtener los resultados
-4. Si regresa error, presionar esc para intentar de nuevo
+3. Despues de hacer la seleccion, presionar esc o enter para obtener los resultados
+4. Si regresa error, presionar esc o enter para intentar de nuevo
 (Por lo general, estos suceden por una diferencia minima de pixeles, asi que puedes seguir intentando con la misma forma)
+5. Una vez confirmados los resultados, presionar enter de nuevo para ahora seleccionar los puntos del objeto encontrado en el interior del objeto original.
+6. Cuando se indique, seleccionar los nuevos puntos en el orden indicado.
+7. Presionar enter una vez mas dentro del cv2 para confirmar.
+8. Dentro de la consola, aparece la opcion de ingresar una de las medidas conocidas, ingresar la clave correspondiente a la medida horizontal o vertical.
+9. Ingresar la medida y confirmar los resultados.
+10. IMPORTANTE: Si se desea volver a usar o reinicar el programa, es necesario cerrar por completo todas las ventas de cv2 y tkinter y volver a correr el programa desde 0.
